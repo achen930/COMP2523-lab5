@@ -9,11 +9,11 @@ const localStrategy = new LocalStrategy(
     passwordField: "password",
   },
   (email, password, done) => {
-    const user = getUserByEmailIdAndPassword(email, password);
-    return user
-      ? done(null, user)
+    const userOrErrorMessage = getUserByEmailIdAndPassword(email, password);
+    return (typeof userOrErrorMessage !== "string")
+      ? done(null, userOrErrorMessage)
       : done(null, false, {
-          message: "Your login details are not valid. Please try again",
+          message: userOrErrorMessage,
         });
   }
 );
