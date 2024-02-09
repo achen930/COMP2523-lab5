@@ -1,41 +1,37 @@
 declare global {
   namespace Express {
-    interface User extends userModel {
+    interface User {
       id: number,
       name: string,
       email: string,
       password?: string,
-      githubId?: string
+      githubId?: string,
+      role: string
     }
   }
 }
 
-interface userModel {
-  id: number,
-  name: string,
-  email: string,
-  password?: string,
-  githubId?: string
-}
-
-const database: userModel[] = [
+const database = [
   {
     id: 1,
     name: "Jimmy Smith",
     email: "jimmy123@gmail.com",
     password: "jimmy123!",
+    role: "user"
   },
   {
     id: 2,
     name: "Johnny Doe",
     email: "johnny123@gmail.com",
-    password: "johnny123!",
+    githubId: "2",
+    role: "user"
   },
   {
     id: 3,
     name: "Jonathan Chen",
     email: "jonathan123@gmail.com",
     password: "jonathan123!",
+    role: "admin"
   }
 ];
 
@@ -69,7 +65,8 @@ const userModel = {
         id: database.length + 1,
         name: profile.displayName,
         email: profile.email,
-        githubId: githubId
+        githubId: githubId,
+        role: "user"
       };
       database.push(user);
       return user;

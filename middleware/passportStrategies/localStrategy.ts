@@ -2,7 +2,6 @@ import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
 import { getUserByEmailIdAndPassword, getUserById} from "../../controllers/userController";
 import { PassportStrategy } from '../../interfaces/index';
-import { userModel } from "../../models/userModel";
 
 const localStrategy = new LocalStrategy(
   {
@@ -18,17 +17,6 @@ const localStrategy = new LocalStrategy(
         });
   }
 );
-
-declare global {
-  namespace Express {
-    interface User extends userModel{
-      id: number,
-      name: string,
-      email: string,
-      password?: string,
-    }
-  }
-}
 
 passport.serializeUser(function (user: Express.User, done) {
   done(null, user.id);
