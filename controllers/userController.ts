@@ -19,6 +19,16 @@ const getUserById = (id:any) => {
   return null;
 };
 
+const createOrFind = (profile: any, githubId: string) => {
+  
+  let user = userModel.findByGithubId(githubId);
+
+  if (!user) {
+    user = userModel.addNewUser(profile, githubId);
+  }
+  return(user);
+}
+
 function isPasswordValid(user: any, password: string) {
   return user.password === password;
 }
@@ -26,4 +36,5 @@ function isPasswordValid(user: any, password: string) {
 export {
   getUserByEmailIdAndPassword,
   getUserById,
+  createOrFind
 };

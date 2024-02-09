@@ -2,6 +2,8 @@ import express from "express";
 import passport from 'passport';
 import { forwardAuthenticated } from "../middleware/checkAuth";
 
+const app = express();
+
 const router = express.Router();
 
 declare module 'express-session' {
@@ -20,6 +22,17 @@ router.post(
     successRedirect: "/dashboard",
     failureRedirect: "/auth/login",
     failureMessage: true
+  })
+);
+
+router.get("/github", passport.authenticate("github", { 
+    scope: ["user: email"]
+  })
+);
+
+router.get("/github/callback", passport.authenticate("github", { 
+    successRedirect: "/dashboard",
+    failureRedirect: "/auth/login"
   })
 );
 
