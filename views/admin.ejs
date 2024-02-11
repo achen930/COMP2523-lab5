@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+</head>
+<body>
+    <h1 class="mt-4">Dashboard</h1>
+    <p class="lead mb-3">Welcome <%= user.name %></p>
+
+    <p class="lead mb-2">Current Active Sessions:</p>
+
+    <div class="mb-5">
+    <ul class="list-group">
+        <% sessionIds.forEach(function(sessionId) { %>
+          <li class="list-group-item">
+            <p>Session ID: <%= sessionId %></p>
+            <p>User ID: <%= sessions[sessionId].passport.user %></p>
+            <form action="/revoke" method="POST">
+          
+              <input type="hidden" name="sessionId" value="<%= sessionId %>">
+              
+              <button type="submit" class="btn btn-warning">Revoke Session</button>
+            </form>
+          </li>
+        <% }); %>
+      </ul>      
+    </div>
+    <a href="/auth/logout" class="btn btn-secondary">Logout</a>
+</body>
+</html>

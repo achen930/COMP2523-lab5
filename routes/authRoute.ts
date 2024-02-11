@@ -2,8 +2,6 @@ import express from "express";
 import passport from 'passport';
 import { forwardAuthenticated } from "../middleware/checkAuth";
 
-const app = express();
-
 const router = express.Router();
 
 declare module 'express-session' {

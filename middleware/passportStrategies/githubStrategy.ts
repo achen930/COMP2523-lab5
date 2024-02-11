@@ -3,7 +3,6 @@ import { PassportStrategy } from '../../interfaces/index';
 import { Request } from 'express';
 import { VerifyCallback } from "passport-oauth2";
 import "dotenv/config";
-import { database, userModel } from '../../models/userModel';
 import { createOrFind } from '../../controllers/userController';
 
 const githubStrategy: GitHubStrategy = new GitHubStrategy(
